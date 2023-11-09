@@ -20,14 +20,179 @@
 - Quản lý bài giảng
 - Quản lý danh mục tin tức
 - Quản lý tin tức
-- Quản lý người dùng (Quản lý hệ thống)
 - Kích hoạt khóa học cho học viên
-- Phân quyền quản trị hệ thống
-- Báo cáo, thống kê,...
 - Quản lý file tài liệu
 - Quản lý video
+- Quản lý đơn hàng
+- Quản lý người dùng (Quản lý hệ thống)
+- Phân quyền quản trị hệ thống
+- Báo cáo, thống kê,...
 
 ## API:
 - Xây dựng API hoàn chỉnh
 
+## Phân tích Database:
+(phân tích các Table từ phần quản trị)
 
+1. Table categories => Quản lý danh mục
+- id => int
+- name => varchar(200)
+- slug => varchar(200)
+- parent_id => int
+- created_at => timestamp
+- updated_at => timestamp
+
+2. Table course => Quản lý khóa học
+- id => int
+- name => varchar(255)
+- slug => varchar(255)
+- detail => text
+- teacher_id => int (forein key -> table Teacher)
+- thumbnail => varchar(255)
+- price => float
+- sale_priece => float
+- code => varchar(100)
+- durations => float
+- is_document => tinyint
+- supports => text
+- status => tinyint
+- created_at => timestamp
+- updated_at => timestamp
+
+3. Table lession => Quản lý bài giảng
+- id => int
+- name => varchar(255)
+- slug => varchar(255)
+- video_id => int
+- document_id => int
+- parent_id => int
+- is_trial => tinyint
+- views => int
+- position => int
+- duration => float
+- description => text
+- created_at => timestamp
+- updated_at => timestamp
+
+4. Table categories_courses => Trung gian liên kết giữa danh mục và khóa học
+- id => int
+- category_id => int
+- course_id => int
+- created_at => timestamp
+- updated_at => timestamp
+
+5. Table teacher => Giảng viên
+- id => int
+- name => varchar(100)
+- slug => varchar(100)
+- description => text
+- exp => float
+- image => varchar(255)
+- created_at => timestamp
+- updated_at => timestamp
+
+6. Table videos => Quản lý video bài giảng
+- id => int
+- name => varchar(255)
+- url => varchar(255)
+- created_at => timestamp
+- updated_at => timestamp
+
+7. Table documents => Quản lý tài liệu bài giảng
+- id => int
+- name => varchar(255)
+- url => varchar(255)
+- size => float
+- created_at => timestamp
+- updated_at => timestamp
+
+8. Table categories_posts => Quản lý danh mục tin tức
+- id => int
+- name => varchar(200)
+- slug => varchar(200)
+- parent_id => int
+- created_at => timestamp
+- updated_at => timestamp
+
+9. Table posts => Quản lý tin tức
+- id => int
+- title => varchar(255)
+- slug => varchar(255)
+- content => text
+- excerpt => text
+- thumbnail => varchar(255)
+- category_id => int (foreign key to categories_posts)
+- created_at => timestamp
+- updated_at => timestamp
+
+10. Table students => Quản lý học viên
+- id => int
+- name => varchar (100)
+- email => varchar(100)
+- phone => varchar(20)
+- password => varchar(100)
+- address => varchar(200)
+- status => tinyint(1)
+- created_at => timestamp
+- updated_at => timestamp
+
+11. Table students_courses => Trung gian học viên và khóa học 
+- id => int
+- course_id => int
+- student_id => int
+- created_at => timestamp
+- updated_at => timestamp
+
+12. Table orders => Quản lý đơn đăng ký của học viên
+- id => int
+- student_id => int
+- total => float
+- status => tinyint(1)
+- created_at => timestamp
+- updated_at => timestamp
+
+13. Table orders_details => Chi tiết đơn hàng
+- id -> int
+- order_id => int
+- course_id => int
+- price => float
+- created_at => timestamp
+- updated_at => timestamp
+
+14. Table orders_status => Quản lý trạng thái đơn hàng
+- id => int
+- name => varchar(200)
+- created_at => timestamp
+- updated_at => timestamp
+
+15. Table users => Quản trị hệ thống
+- id => int
+- name => varchar(100)
+- password => varchar(100)
+- group_id => int
+- created_at => timestamp
+- updated_at => timestamp
+
+16. Table groups => Quản trị nhóm người dùng
+- id => int
+- name => varchar(100)
+- permissions => text
+- created_at => timestamp
+- updated_at => timestamp
+
+17. Table module => Danh sách các module trong trang quản trị
+- id => int
+- name => varchar(100)
+- title => varchar(200)
+- role => text
+
+18. Table options => Quản lý các thiết lập
+- id => int
+- name => varchar(100)
+- value => text
+
+## Cài đặt Laravel Module và Repository
+
+### Cài đặt Laravel Module
+
+### Cài đặt Repository cho Laravel Module
