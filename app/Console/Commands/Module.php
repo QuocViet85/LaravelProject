@@ -31,6 +31,7 @@ class Module extends Command
         $modulesFolder = base_path('modules');
         if (!File::exists($modulesFolder))
         {
+            $this->info('Hah');
             File::makeDirectory($modulesFolder);
         }
 
@@ -162,10 +163,32 @@ class Module extends Command
                 {
                     File::makeDirectory($modelsFolder);
                 }
+
+                //Reposiotories
+                $repositoriesFolder = base_path('modules/'.$name.'/src/Repositories');
+                if (!File::exists($repositoriesFolder))
+                {
+                    File::makeDirectory($repositoriesFolder);
+
+                    //Module Repository
+                    $moduleRepositoryInterfaceFile = base_path('modules/'.$name.'/src/Repositories/'.$name.'RepositoryInterface.php');
+
+                    if (!File::exists($moduleRepositoryInterfaceFile))
+                    {
+                        File::put($moduleRepositoryInterfaceFile, $this->getContentRepositoriesInterface($name));
+                    }
+
+                    $moduleRepositoryFile = base_path('modules/'.$name.'/src/Repositories/'.$name.'Repository.php');
+
+                    if (!File::exists($moduleRepositoryFile))
+                    {
+                        File::put($moduleRepositoryFile, $this->getContentRepositories($name));
+                    }
+                }
+                }
             }
             $this->info('Module created successfully');
         }
-    }
 
     private function getContentRouteFile($module)
     {
@@ -207,4 +230,36 @@ class ModuleServiceProvider extends ServiceProvider
     }
 }";
     }
+
+    private function getContentRepositoriesInterface($module)
+    {
+        return "<?php
+namespace Modules\\{$module}\src\Repositories;
+
+use App\Repositories\RepositoryInterface;
+
+interface {$module}RepositoryInterface extends RepositoryInterface
+{
+    
+}";
+    }
+
+    private function getContentRepositories($module)
+    {
+        return "<?php
+namespace Modules\\{$module}\src\Repositories;
+
+use App\Repositories\BaseRepository;
+use Modules\\{$module}\src\Repositories\\{$module}RepositoryInterface;
+use Modules\\{$module}\src\Models\\{$module};
+
+class {$module}Repository extends BaseRepository implements {$module}RepositoryInterface
+{
+    public function getModel()
+    {
+        return {$module}::class;
+    }
+}";
+    }
+
 }

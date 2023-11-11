@@ -196,3 +196,9 @@
 ### Cài đặt Laravel Module
 
 ### Cài đặt Repository cho Laravel Module
+
+## Viết Artisan Console cho Laravel Module
+
+`php artisan make:module ten_module`
+
+## Tích hợp Layout Admin

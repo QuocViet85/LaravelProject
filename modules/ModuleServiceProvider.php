@@ -2,20 +2,17 @@
 namespace Modules;
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Support\Facades\File;
-use Modules\User\src\Http\Middlewares\DemoMiddleware;
-use Psy\ConfigPaths;
-use Modules\User\src\Commands\TestCommand;
 use Modules\User\src\Repositories\UserRepositoryInterface;
 use Modules\User\src\Repositories\UserRepository;
 
 class ModuleServiceProvider extends ServiceProvider
 {
     private $middlewares = [
-        'demo' => DemoMiddleware::class
+        
     ];
 
     private $commands = [
-        TestCommand::class
+
     ];
 
     public function boot()

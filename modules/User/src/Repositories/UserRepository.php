@@ -11,9 +11,4 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return User::class;
     }
-
-    public function getUsers($limit = 10)
-    {
-        return $this->model->limit($limit)->get();
-    }
 }
