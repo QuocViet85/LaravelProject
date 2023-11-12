@@ -202,3 +202,14 @@
 `php artisan make:module ten_module`
 
 ## Tích hợp Layout Admin
+
+## Xây dựng Module quản lý Users
+
+### Tạo migrations - Seeder - Chuân bị giao diện
+
+### Tạp Repository và các phương thức cần thiết
+- Hiển thị danh sách User (Có phân trang)
+- Thêm user
+- Sửa user
+- Xóa user
+- Lấy thông tin 1 user
