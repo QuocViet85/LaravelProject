@@ -213,3 +213,7 @@
 - Sửa user
 - Xóa user
 - Lấy thông tin 1 user
+
+### Tạo FormRequest và các phương thức Validation
+
+### Viết chức năng thêm user
