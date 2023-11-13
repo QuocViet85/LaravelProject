@@ -217,3 +217,7 @@
 ### Tạo FormRequest và các phương thức Validation
 
 ### Viết chức năng thêm user
+
+### Viết chức năng hiển thị user
+
+Thư viện datatable: https://datatables.net/
