@@ -220,4 +220,10 @@
 
 ### Viết chức năng hiển thị user
 
-Thư viện datatable: https://datatables.net/
+Thư viện FrontEnd datatable: https://datatables.net/
+
+Package hỗ trợ thư viện FrontEnd datatable trên của Laravel: https://yajrabox.com/docs/laravel-datatables/10.0
+
+Thư viện faker factory của Laravel: https://github.com/fzaninotto/Faker
+
+Package kiểm tra câu lệnh SQ của Laravel (có thể cho biết câu lệnh SQL được sinh ra là gì và từ câu lệnh nào trong code): https://github.com/barryvdh/laravel-debugbar
