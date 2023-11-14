@@ -16,7 +16,7 @@
             <th>Xóa</th>
         </tr>
     </thead>
-    <tfoot>
+    {{-- <tfoot>
         <tr>
             <th>Tên</th>
             <th>Eamil</th>
@@ -25,18 +25,18 @@
             <th style="width: 5%">Sửa</th>
             <th style="width: 5%">Xóa</th>
         </tr>
-    </tfoot>
+    </tfoot> --}}
 </table>
 @endsection
     
 @section('script')
     <script>
         let table = new DataTable('#datatable', {
-            ajax: '{{ route('admin.users.data') }}',
+            ajax: '{{ route('admin.users.data') }}', //gọi vào API BackEnd để lấy dữ liệu
             processing: true,
             serverSide: true,
-            "columns": [
-                { "data": "name" },
+            "columns": [ //Tên cột theo tên trường dữ liệu lấy từ BackEnd
+                { "data": "name" }, 
                 { "data": "email" },
                 { "data": "group_id" },
                 { "data": "created_at" },

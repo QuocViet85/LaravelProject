@@ -221,3 +221,9 @@
 ### Viết chức năng hiển thị user
 
 Thư viện datatable: https://datatables.net/
+
+Package hỗ trợ datatable của Laravel: https://yajrabox.com/docs/laravel-datatables/10.0
+
+Thư viện faker factory: https://github.com/fzaninotto/Faker
+
+Kiểm tra câu lệnh SQL: https://github.com/barryvdh/laravel-debugbar
