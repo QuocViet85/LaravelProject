@@ -3,4 +3,4 @@
 - Hàm asset() gọi đến thư mục public
 - Cú pháp artisan run file seeder tự tạo: php artisan db:seed --class=`tên đầy đủ của class seeder`
 - Trong các route module, nên khai báo sử dụng middleware web để các route module có đầy đủ tính năng như route mặc định. Ví dụ, phải có middleware web thì @error mới hoạt động
-- Truy cập vào thành phần từ 1 thành phần cấp cao hơn nó 1 bậc có thể dùng dấu .
+- Khi sử dụng các hàm truy cập đến file php hoặc truy cập dữ liệu nào đó trong file php thì tham số các hàm sẽ là chuỗi string dẫn đến dữ liệu muốn truy cập và chuỗi string này thường có dạng như sau: ('tên file'.'key'.'key'.'key'...) với các key là các key dẫn đến dữ liệu muốn truy cập.

@@ -220,9 +220,16 @@
 
 ### Viết chức năng hiển thị user
 
-Thư viện FrontEnd datatable: https://datatables.net/
+Thư viện FrontEnd datatable (DataTable FrontEnd): https://datatables.net/
 
-Package hỗ trợ thư viện FrontEnd datatable trên của Laravel: https://yajrabox.com/docs/laravel-datatables/10.0
+Package hỗ trợ thư viện FrontEnd datatable trên của Laravel (DataTable FrontEnd): https://yajrabox.com/docs/laravel-datatables/10.0
+
+* Cơ chế hoạt động phối hợp của DataTable FrontEnd và DataTable BackEnd:
+- DataTable FrontEnd gửi request yêu cầu dữ liệu lên Server. Trong request này chứa địa chỉ lấy dữ liệu và query string cho biết đây là request của DataTable FrontEnd và dữ liệu cụ thể muốn lấy.
+- DataTable BackEnd nhận biết request của DataTable FrontEnd.
+- DataTable BackEnd gọi action lấy dữ liệu theo địa chỉ lấy dữ liệu trong request của DataTable FrontEnd. Action này bắt buộc phải trả về chuỗi json chứa dữ liệu truy vấn được từ database và câu lệnh SQL để lấy dữ liệu đó từ database.
+- DataTable BackEnd chỉnh sửa câu lệnh SQL để lấy dữ liệu theo yêu cầu của DataTable FrontEnd sau đó dùng câu lệnh SQL đó truy vấn vào database.
+- DataTable BackEnd trả về dữ liệu đã truy vấn được cho DataTable FrontEnd.
 
 Thư viện faker factory của Laravel: https://github.com/fzaninotto/Faker
 
