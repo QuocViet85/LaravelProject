@@ -23,5 +23,29 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     }
 
+    const tableList = document.querySelector("#datatable");
+    const deleteForm = document.querySelector('.delete-form')
+    tableList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-action')) //target trả về phần tử (thẻ) HTML theo dạng đối tượng mà người dùng click vào
+        {
+            e.preventDefault(); //vô hiệu hóa ảnh hưởng của phần tử khi có thao tác với phần tử (ở đây là thao tác click)
+            Swal.fire({
+                title: "Bạn có chắc chắn xóa?",
+                text: "Nếu xóa bạn không thể khôi phục!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok, Đồng ý xóa!"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    const action = e.target.href; //lấy link (giá trị thuộc tính href) của thẻ a
+                    console.log(action);
+                    deleteForm.action = action;
+                    deleteForm.submit();
+                }
+              });
+        }
+    });
 });
 
