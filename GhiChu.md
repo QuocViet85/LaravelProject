@@ -236,3 +236,5 @@ Thư viện faker factory của Laravel: https://github.com/fzaninotto/Faker
 Package kiểm tra câu lệnh SQ của Laravel (có thể cho biết câu lệnh SQL được sinh ra là gì và từ câu lệnh nào trong code): https://github.com/barryvdh/laravel-debugbar
 
 Thư viện sweetalert để tạo alert thông báo trên trình duyệt: https://sweetalert2.github.io/
+
+## Xây dựng Module quản lý danh mục

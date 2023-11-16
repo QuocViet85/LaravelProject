@@ -78,7 +78,7 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id)
     {
-        $data = $request->except('_token', 'password'); //lấy tất cả dữ liệu từ request ngoại trừ dữ liệu có key là _token
+        $data = $request->except('_token', 'password'); //lấy tất cả dữ liệu từ request ngoại trừ dữ liệu có key là _token, password
 
         if ($request->password)
         {

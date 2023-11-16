@@ -2,8 +2,10 @@
 namespace Modules;
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Support\Facades\File;
-use Modules\User\src\Repositories\UserRepositoryInterface;
 use Modules\User\src\Repositories\UserRepository;
+use Modules\User\src\Repositories\UserRepositoryInterface;
+use Modules\Categories\src\Repositories\CategoriesRepository;
+use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -138,6 +140,11 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->singleton(
             UserRepositoryInterface::class,
             UserRepository::class
+        );
+
+        $this->app->singleton(
+            CategoriesRepositoryInterface::class,
+            CategoriesRepository::class
         );
     }
 }
