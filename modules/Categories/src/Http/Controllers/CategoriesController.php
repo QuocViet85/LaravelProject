@@ -90,4 +90,9 @@ class CategoriesController extends Controller
         $this->categoryRepo->delete($id);
         return back()->with('msg', trans('categories::messages.delete.success'));
     }
+
+    public function test()
+    {
+        
+    }
 }

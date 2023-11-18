@@ -6,7 +6,7 @@
             <div class="col-6">
                 <div class="mb3">
                     <label for="">Tên</label>
-                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Tên..." value="{{ old('name') }}">
+                    <input type="text" name="name" class="form-control title @error('name') is-invalid @enderror" placeholder="Tên..." value="{{ old('name') }}">
                     <div class="invalid-feedback">
                         @error('name')
                         {{ $message }}
@@ -18,7 +18,7 @@
             <div class="col-6">
                 <div class="mb3">
                     <label for="">Slug</label>
-                    <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" placeholder="Slug..." value="{{ old('slug') }}">
+                    <input type="text" name="slug" class="form-control slug @error('slug') is-invalid @enderror" placeholder="Slug..." value="{{ old('slug') }}">
                     <div class="invalid-feedback">
                         @error('slug')
                         {{ $message }}
