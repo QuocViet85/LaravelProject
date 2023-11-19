@@ -34,6 +34,7 @@
             ajax: '{{ route('admin.categories.data') }}', //gọi vào API BackEnd để lấy dữ liệu
             processing: true,
             serverSide: true,
+            pageLength: 2,
             "columns": [ //Tên cột theo tên trường dữ liệu lấy từ BackEnd
                 { "data": "name" }, 
                 { "data": "link" },

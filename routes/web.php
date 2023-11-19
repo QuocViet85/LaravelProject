@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+use function App\Models\TestOut;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -28,27 +28,34 @@ class CategoriesController extends Controller
     {
         $categories = $this->categoryRepo->getCategories(); 
 
-        return DataTables::of($categories)
-        ->addColumn('edit', function ($category) {
-            return '<a href="'.route('admin.categories.edit', $category).'" class="btn btn-warning">Sửa</a>';
-        })
-        ->addColumn('delete', function ($category) {
-            return '<a href="'.route('admin.categories.delete', $category).'" class="btn btn-danger delete-action">Xóa</a>';
-        })
-        ->addColumn('link', function ($category) {
-            return '<a href="" class="btn btn-primary">Xem</a>';
-        })
-        ->editColumn('created_at', function ($category) {
-            return Carbon::parse($category->created_at)->format('d/m/Y H:i:s');
-        })
-        ->rawColumns(['edit', 'delete', 'link'])
-        ->toJson();
+        $categories = DataTables::of($categories)
+        // ->addColumn('edit', function ($category) {
+        //     return '<a href="'.route('admin.categories.edit', $category).'" class="btn btn-warning">Sửa</a>';
+        // })
+        // ->addColumn('delete', function ($category) {
+        //     return '<a href="'.route('admin.categories.delete', $category).'" class="btn btn-danger delete-action">Xóa</a>';
+        // })
+        // ->addColumn('link', function ($category) {
+        //     return '<a href="" class="btn btn-primary">Xem</a>';
+        // })
+        // ->editColumn('created_at', function ($category) {
+        //     return Carbon::parse($category->created_at)->format('d/m/Y H:i:s');
+        // })
+        // ->rawColumns(['edit', 'delete', 'link'])
+        ->toArray();
+
+        $categories['data'] = getCategoriesTable($categories['data']);
+
+        return $categories;
     }
 
     public function create()
     {
         $pageTitle = 'Thêm danh mục';
-        return view('categories::add', compact('pageTitle'));
+
+        $categories = $this->categoryRepo->getAllCategories();
+
+        return view('categories::add', compact('pageTitle', 'categories'));
     }
 
     public function store(CategoryRequest $request)
@@ -73,7 +80,9 @@ class CategoriesController extends Controller
 
         $pageTitle = 'Cập nhật danh mục';
 
-        return view('categories::edit', compact('category', 'pageTitle'));
+        $categories = $this->categoryRepo->getAllCategories();
+
+        return view('categories::edit', compact('category', 'pageTitle', 'categories'));
     }
 
     public function update(CategoryRequest $request, $id)
@@ -89,10 +98,5 @@ class CategoriesController extends Controller
     {
         $this->categoryRepo->delete($id);
         return back()->with('msg', trans('categories::messages.delete.success'));
-    }
-
-    public function test()
-    {
-        
     }
 }

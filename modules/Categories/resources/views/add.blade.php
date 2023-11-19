@@ -32,6 +32,7 @@
                     <label for="">Cha</label>
                     <select name="parent_id" id="" class="form-select @error('parent_id') is-invalid @enderror">
                         <option value="0">Không</option>
+                        {{ getCategories($categories, old('parent_id')) }}
                     </select>
                     <div class="invalid-feedback">
                         @error('parent_id')
