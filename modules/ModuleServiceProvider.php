@@ -6,6 +6,8 @@ use Modules\User\src\Repositories\UserRepository;
 use Modules\User\src\Repositories\UserRepositoryInterface;
 use Modules\Categories\src\Repositories\CategoriesRepository;
 use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
+use Modules\Courses\src\Repositories\CoursesRepository;
+use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -145,6 +147,11 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->singleton(
             CategoriesRepositoryInterface::class,
             CategoriesRepository::class
+        );
+
+        $this->app->singleton(
+            CoursesRepositoryInterface::class,
+            CoursesRepository::class
         );
     }
 }
