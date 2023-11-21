@@ -42,8 +42,7 @@
                 { "data": "status" },
                 { "data": "created_at" },
                 { "data": "edit" },
-                { "data": "delete" },
-                { "data": "xyz"}
+                { "data": "delete" }
                 ]  
             });
     </script>
