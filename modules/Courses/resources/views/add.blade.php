@@ -120,24 +120,25 @@
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="mb3">
-                    <label for="">Nội dung</label>
-                    <textarea name="detail" class="form-control @error('detail') is-invalid @enderror" placeholder="Nội dung..." value="{{ old('detail') }}"></textarea>
-                    <div class="invalid-feedback">
-                        @error('detail')
-                        {{ $message }}
-                        @enderror
+                <div class="col-12">
+                    <div class="mb3">
+                        <label for="">Nội dung</label>
+                        <textarea name="detail" class="form-control ckeditor @error('detail') is-invalid @enderror" placeholder="Nội dung..." value="{{ old('detail') }}"></textarea>
+                        <div class="invalid-feedback">
+                            @error('detail')
+                            {{ $message }}
+                            @enderror
+                        </div>
                     </div>
                 </div>
-            </div>
-
+    
+            
             <div class="col-12">
                 <div class="mb3">
                     <div class="row align-items-end">
                         <div class="col-7">
                             <label for="">Ảnh đại diện</label>
-                            <input type="text" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror" placeholder="Ảnh đại diện..." value="{{ old('thumbnail') }}">
+                            <input type="text" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror" placeholder="Ảnh đại diện..." value="{{ old('thumbnail') }}" id="thumbnail">
                             <div class="invalid-feedback">
                                 @error('thumbnail')
                                 {{ $message }}
@@ -146,13 +147,13 @@
                         </div>
 
                         <div class="col-2 d-grid">
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" id="lfm" data-input="thumbnail" data-preview="holder">
                                 Chọn ảnh
                             </button>
                         </div>
 
-                        <div class="col-3">
-                            <img src="https://fastly.picsum.photos/id/216/536/354.jpg?hmac=xmRTiQKMpTHRf6LLxm-g8MfrMY3VhuIPhdsbdabjVbs" alt="">
+                        <div class="col-3" >
+                            <div id="holder" style="margin-top:15px;max-height:100px;"></div>
                         </div>
                     </div>
                 </div>
@@ -172,7 +173,12 @@
     <style>
         img {
             max-width: 100%;
-            height: auto;
+            height: auto !important;
+        }
+
+        #holder img {
+            width: 50%;
+            height: 80%;
         }
     </style>
 @endsection

@@ -8,3 +8,4 @@
 - (FrontEnd) addEventListener() để chạy việc lắng nghe sự kiện. Nếu ngay từ đầu lúc load xong trang việc lắng nghe sự kiện không được chạy thì suốt cả quá trình sử dụng trang hiện tại, việc lắng nghe sự kiện đó cũng không xảy ra
 - (Eloquent) Phương thức with('tên method') của Model sẽ thi hành phương thức của đối tượng Model có cùng tên như trong tham số của phương thức with (nếu class Model không định nghĩa phương thức nào như vậy thì sẽ lỗi), kết quả trả về của phương thức đó sẽ gán vào thuộc tính có cùng tên với phương thức đó. Nếu gọi phương thức with() từ Model class thì sẽ thi hành phương thức with() này với các đối tượng Model lấy ra.
 - Hàm unset($arr['key']) dùng để xóa phần tử trong mảng theo key phần tử.
+- Thiết lập đường dẫn URL cho thư mục public tại file configs\filesystems.php

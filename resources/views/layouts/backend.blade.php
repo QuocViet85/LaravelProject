@@ -30,7 +30,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/v/dt/dt-1.13.7/datatables.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src={{ asset('backend/plugins/ckeditor/ckeditor.js') }}></script>
         <script src={{ asset('backend/js/scripts.js') }}></script>
+        <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+        <script>
+             $('#lfm').filemanager('image');
+        </script>
         @yield('script')
     </body>
 </html>

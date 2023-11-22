@@ -281,3 +281,12 @@ function getSlug(title) {
     ]
 ]
 
+## Xây dựng Module Course
+
+### Tích hợp Ckeditor để soạn thảo văn bản và Laravel Filemanager để quản lý file
+
+* Ckeditor (ver 4): https://ckeditor.com/ckeditor-4/download/
+
+* Laravel FileManager: 
++ https://github.com/UniSharp/laravel-filemanager
++ https://unisharp.github.io/laravel-filemanager/
