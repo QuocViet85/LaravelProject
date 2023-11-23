@@ -97,8 +97,8 @@
                 <div class="mb3">
                     <label for="">Trạng thái</label>
                     <select name="status" id="" class="form-select @error('status') is-invalid @enderror">
-                        <option value="0" {{ old('status') ? 'selected' : false }}>Chưa ra mắt</option>
-                        <option value="1" {{ old('status') ? 'selected' : false }}>Đã ra mắt</option>
+                        <option value="0" {{ old('status') == 0 ? 'selected' : false }}>Chưa ra mắt</option>
+                        <option value="1" {{ old('status') == 1 ? 'selected' : false }}>Đã ra mắt</option>
                     </select>
                     <div class="invalid-feedback">
                         @error('status')
@@ -165,7 +165,7 @@
             
             <div class="col-12">
                     <button type="submit" class="btn btn-primary">Lưu lại</button>
-                    <a href="{{ route('admin.users.index') }}" class="btn btn-danger">Hủy</a>
+                    <a href="{{ route('admin.courses.index') }}" class="btn btn-danger">Hủy</a>
             </div>
         </div>
         @csrf

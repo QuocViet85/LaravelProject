@@ -9,3 +9,6 @@
 - (Eloquent) Phương thức with('tên method') của Model sẽ thi hành phương thức của đối tượng Model có cùng tên như trong tham số của phương thức with (nếu class Model không định nghĩa phương thức nào như vậy thì sẽ lỗi), kết quả trả về của phương thức đó sẽ gán vào thuộc tính có cùng tên với phương thức đó. Nếu gọi phương thức with() từ Model class thì sẽ thi hành phương thức with() này với các đối tượng Model lấy ra.
 - Hàm unset($arr['key']) dùng để xóa phần tử trong mảng theo key phần tử.
 - Thiết lập đường dẫn URL cho thư mục public tại file configs\filesystems.php
+- Hàm number_format() để xuất ra định dạng số theo ý muốn.
+- Bản chất truyền dữ liệu từ controller sang view là: Ở Controller, dữ liệu thiết lập truyền sang view sẽ có dạng key/value và khi sang view, dữ liệu sẽ trở thành biến với key là tên biến và value là giá trị của biến
+- Hàm compact('tên biến trong nơi gọi hàm compact()') trả về mảng phần tử key/value với key là tên biến và value là giá trị của biến
