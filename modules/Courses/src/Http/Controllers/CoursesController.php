@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
-use Modules\Course\src\Http\Requests\CourseRequest;
+use Modules\Courses\src\Http\Requests\CoursesRequest;
 use Modules\Courses\src\Repositories\CoursesRepository;
 
 class CoursesController extends Controller
@@ -50,9 +50,9 @@ class CoursesController extends Controller
         return view('courses::add', compact('pageTitle'));
     }
 
-    public function store(CourseRequest $request)
+    public function store(CoursesRequest $request)
     {
-        
+        //return redirect()->route('admin.courses.index')->with('msg', trans('user::messages.create.success'));
     }
 
     public function edit($id)
@@ -69,7 +69,7 @@ class CoursesController extends Controller
         return view('courses::edit', compact('course', 'pageTitle'));
     }
 
-    public function update(CourseRequest $request, $id)
+    public function update(CoursesRequest $request, $id)
     {
         
     }

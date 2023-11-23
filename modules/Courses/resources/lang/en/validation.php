@@ -7,10 +7,15 @@ return [
     'max' => ':attribute không được lớn hơn :max ký tự',
     'integer' => ':attribute phải là số',
     'select' => ':attribute bắt buộc phải chọn',
-    // 'attributes' => [
-    //     'name' => 'Tên',
-    //     'email' => 'Email',
-    //     'password' => 'Mật khẩu',
-    //     'group_id' => 'Nhóm'
-    // ] 
+    'attributes' => [
+        'name' => 'Tên',
+        'slug' => 'Slug',
+        'detail' => 'Nội dung',
+        'teacher_id' => 'Giảng viên',
+        'thumbnail' => 'Ảnh đại diện',
+        'code' => 'Mã khóa học',
+        'is_document' => 'Tài liệu đính kèm',
+        'supports' => 'Hỗ trợ',
+        'status' => 'Trạng thái'
+    ] 
 ];
