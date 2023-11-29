@@ -286,6 +286,7 @@ function getSlug(title) {
 ### Tích hợp Ckeditor để soạn thảo văn bản và Laravel Filemanager để quản lý file
 
 * Ckeditor (ver 4): https://ckeditor.com/ckeditor-4/download/
+- Chỉ cần nạp thư viện và đặt class ckeditor cho trường nhập dữ liệu cần sử dụng ckeditor là có thể sử dụng ckeditor được.
 
 * Laravel FileManager: 
 + https://github.com/UniSharp/laravel-filemanager

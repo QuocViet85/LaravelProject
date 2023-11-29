@@ -11,4 +11,4 @@
 - Thiết lập đường dẫn URL cho thư mục public tại file configs\filesystems.php
 - Hàm number_format() để xuất ra định dạng số theo ý muốn.
 - Bản chất truyền dữ liệu từ controller sang view là: Ở Controller, dữ liệu thiết lập truyền sang view sẽ có dạng key/value và khi sang view, dữ liệu sẽ trở thành biến với key là tên biến và value là giá trị của biến
-- Hàm compact('tên biến trong nơi gọi hàm compact()') trả về mảng phần tử key/value với key là tên biến và value là giá trị của biến
+- Hàm compact('tên biến trong nơi gọi hàm compact()') trả về mảng phần tử key/value với key là tên biến và value là giá trị của biến.

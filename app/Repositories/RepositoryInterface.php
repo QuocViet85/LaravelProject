@@ -9,7 +9,7 @@ interface RepositoryInterface
 
     public function create($attribute = []);
 
-    public function update($id, $attribute = []);
+    public function update($id, $attributes = []);
 
     public function delete($id);
 }

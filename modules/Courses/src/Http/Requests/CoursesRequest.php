@@ -23,6 +23,15 @@ class CoursesRequest extends FormRequest
      */
     public function rules()
     {
+        $courseId = $this->route()->course;
+
+        $uniqueRule = 'unique:courses,code';
+
+        if ($courseId)
+        {
+            $uniqueRule.= ','.$courseId;
+        }
+
         $rules = [
             'name' => 'required|max:255',
             'slug' => 'required|max:255',
@@ -30,14 +39,15 @@ class CoursesRequest extends FormRequest
             'teacher_id' => ['required', 'integer', function ($attribute, $value, $fail) {
                 if ($value == 0) 
                 {
-                    $fail(trans('courses::validation.select'));
+                    $fail(trans('courses::validation.validate.select'));
                 }
             }],
             'thumbnail' => 'required|max:255',
-            'code' => 'required|max:255',
+            'code' => 'required|max:255|'.$uniqueRule,
             'is_document' => 'required|integer',
             'supports' => 'required',
             'status' => 'required|integer',
+            'categories' => 'required'
         ];
 
         return $rules;
@@ -45,11 +55,7 @@ class CoursesRequest extends FormRequest
 
     public function messages()
     {
-        return [
-            'required' => trans('courses::validation.required'),
-            'max' => trans('courses::validation.max'),
-            'integer' => trans('courses::validation.integer')
-        ];
+        return trans('courses::validation.validate');
     }
 
     public function attributes()

@@ -131,11 +131,25 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-12">
+                    <div class="mb3">
+                        <label for="">Chuyên mục</label>
+                        <div class="list-categories">
+                            {{ getCategoriesCheckBox($categories, old('categories')) }}
+                        </div>
+                        <div class="invalid-feedback d-block">
+                            @error('categories')
+                            {{ $message }}
+                            @enderror
+                        </div>
+                    </div>
+                </div>
     
             
             <div class="col-12">
                 <div class="mb3">
-                    <div class="row align-items-end">
+                    <div class="row align-items-{{ $errors->has('thumbnail') ? 'center' : 'end' }}">
                         <div class="col-7">
                             <label for="">Ảnh đại diện</label>
                             <input type="text" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror" placeholder="Ảnh đại diện..." value="{{ old('thumbnail') }}" id="thumbnail">
@@ -183,6 +197,11 @@
         #holder img {
             width: 50%;
             height: 80%;
+        }
+
+        .list-categories {
+            max-height: 250px;
+            overflow: auto;
         }
     </style>
 @endsection

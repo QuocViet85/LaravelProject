@@ -6,17 +6,22 @@ use Termwind\Components\Raw;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
 use Yajra\DataTables\Facades\DataTables;
 use Modules\Courses\src\Http\Requests\CoursesRequest;
 use Modules\Courses\src\Repositories\CoursesRepository;
+use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
 
 class CoursesController extends Controller
 {
     protected $coursesRepo;
 
-    public function __construct(CoursesRepository $coursesRepo)
+    protected $categoriesRepo;
+
+    public function __construct(CoursesRepositoryInterface $coursesRepo, CategoriesRepositoryInterface $categoriesRepo)
     {
         $this->coursesRepo = $coursesRepo;
+        $this->categoriesRepo = $categoriesRepo;
     }
 
     public function index()
@@ -69,7 +74,10 @@ class CoursesController extends Controller
     public function create()
     {  
         $pageTitle = 'Thêm khóa học';
-        return view('courses::add', compact('pageTitle'));
+
+        $categories = $this->categoriesRepo->getAllCategories();
+
+        return view('courses::add', compact('pageTitle', 'categories'));
     }
 
     public function store(CoursesRequest $request)
@@ -86,7 +94,12 @@ class CoursesController extends Controller
             $course['price'] = 0;
         }
 
-        $this->coursesRepo->create($course);
+        $courseInserted = $this->coursesRepo->create($course);
+
+        $categories = $this->getCategories($course);
+
+        $this->coursesRepo->createCourseCategories($courseInserted, $categories);
+
         return redirect()->route('admin.courses.index')->with('msg', trans('courses::messages.create.success'));
     }
 
@@ -99,9 +112,13 @@ class CoursesController extends Controller
             abort(404);
         }
 
+        $categoryIds = $this->coursesRepo->getRelatedCategories($course);
+
+        $categories = $this->categoriesRepo->getAllCategories();
+
         $pageTitle = 'Cập nhật khóa học';
 
-        return view('courses::edit', compact('course', 'pageTitle'));
+        return view('courses::edit', compact('course', 'pageTitle', 'categories', 'categoryIds'));
     }
 
     public function update(CoursesRequest $request, $id)
@@ -120,12 +137,32 @@ class CoursesController extends Controller
 
         $this->coursesRepo->update($id, $course);
 
+        $categories = $this->getCategories($course);
+
+        $courseUpdate = $this->coursesRepo->find($id);
+
+        $this->coursesRepo->updateCourseCategories($courseUpdate, $categories);
+
         return back()->with('msg', trans('courses::messages.update.success'));
     }
 
     public function delete($id)
     {
+        $course = $this->coursesRepo->find($id);
+        $this->coursesRepo->deleteCourseCategories($course);
         $this->coursesRepo->delete($id);
         return back()->with('msg', trans('courses::messages.delete.success'));
+    }
+
+    public function getCategories($course)
+    {
+        $categories = [];
+
+        foreach ($course['categories'] as $category)
+        {
+            $categories[$category] = ['created_at' => Carbon::now()->format('Y-m-d H:i:s'), 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')];
+        }
+
+        return $categories;
     }
 }
