@@ -291,3 +291,5 @@ function getSlug(title) {
 * Laravel FileManager: 
 + https://github.com/UniSharp/laravel-filemanager
 + https://unisharp.github.io/laravel-filemanager/
+
+## Xây dựng Module quản lý giảng viên
