@@ -11,6 +11,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Modules\Courses\src\Http\Requests\CoursesRequest;
 use Modules\Courses\src\Repositories\CoursesRepository;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
+use Modules\Teacher\src\Repositories\TeacherRepositoryInterface;
 
 class CoursesController extends Controller
 {
@@ -18,10 +19,15 @@ class CoursesController extends Controller
 
     protected $categoriesRepo;
 
-    public function __construct(CoursesRepositoryInterface $coursesRepo, CategoriesRepositoryInterface $categoriesRepo)
+    protected $teacherRepo;
+
+    public function __construct(CoursesRepositoryInterface $coursesRepo, 
+    CategoriesRepositoryInterface $categoriesRepo, 
+    TeacherRepositoryInterface $teacherRepo)
     {
         $this->coursesRepo = $coursesRepo;
         $this->categoriesRepo = $categoriesRepo;
+        $this->teacherRepo = $teacherRepo;
     }
 
     public function index()
@@ -77,7 +83,9 @@ class CoursesController extends Controller
 
         $categories = $this->categoriesRepo->getAllCategories();
 
-        return view('courses::add', compact('pageTitle', 'categories'));
+        $teachers = $this->teacherRepo->getAllTeachers()->get();
+
+        return view('courses::add', compact('pageTitle', 'categories', 'teachers'));
     }
 
     public function store(CoursesRequest $request)
@@ -116,9 +124,11 @@ class CoursesController extends Controller
 
         $categories = $this->categoriesRepo->getAllCategories();
 
+        $teachers = $this->teacherRepo->getAllTeachers()->get();
+
         $pageTitle = 'Cập nhật khóa học';
 
-        return view('courses::edit', compact('course', 'pageTitle', 'categories', 'categoryIds'));
+        return view('courses::edit', compact('course', 'pageTitle', 'categories', 'categoryIds', 'teachers'));
     }
 
     public function update(CoursesRequest $request, $id)
@@ -149,8 +159,15 @@ class CoursesController extends Controller
     public function delete($id)
     {
         $course = $this->coursesRepo->find($id);
-        $this->coursesRepo->deleteCourseCategories($course);
-        $this->coursesRepo->delete($id);
+        //$this->coursesRepo->deleteCourseCategories($course);
+        $status = $this->coursesRepo->delete($id);
+
+        if ($status) 
+        {   
+            $image = $course->thumbnail;
+            deleteFileStorage($image);
+        }
+
         return back()->with('msg', trans('courses::messages.delete.success'));
     }
 

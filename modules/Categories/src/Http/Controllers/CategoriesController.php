@@ -44,7 +44,7 @@ class CategoriesController extends Controller
         // ->rawColumns(['edit', 'delete', 'link'])
         ->toArray();
 
-        $categories['data'] = getCategoriesTable($categories['data']);
+        $categories['data'] = $this->getCategoriesTable($categories['data']);
 
         return $categories;
     }
@@ -98,5 +98,29 @@ class CategoriesController extends Controller
     {
         $this->categoryRepo->delete($id);
         return back()->with('msg', trans('categories::messages.delete.success'));
+    }
+
+    private function getCategoriesTable($categories, $char = '', &$result = [])
+    {
+        if (!empty($categories))
+        {
+            foreach ($categories as $key => $category)
+            {
+                $row = $category;
+                $row['name'] = $char.$row['name'];
+                $row['edit'] = '<a href="'.route('admin.categories.edit', $category['id']).'" class="btn btn-warning">Sửa</a>';
+                $row['delete'] = '<a href="'.route('admin.categories.delete', $category['id']).'" class="btn btn-danger delete-action">Xóa</a>';
+                $row['link'] = '<a target="_blank" href="" class="btn btn-primary">Xem</a>';
+                $row['created_at'] = Carbon::parse($row['created_at'])->format('d/m/Y H:i:s');
+                unset($row['sub_categories']);
+                unset($row['updated_at']);
+                $result[] = $row;
+                if (!empty($category['sub_categories']))
+                {
+                    $this->getCategoriesTable($category['sub_categories'], $char.'|--', $result);
+                }
+            }
+        }
+        return $result;
     }
 }

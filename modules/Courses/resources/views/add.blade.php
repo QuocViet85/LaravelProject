@@ -32,7 +32,11 @@
                     <label for="">Giảng viên</label>
                     <select name="teacher_id" id="" class="form-select @error('teacher_id') is-invalid @enderror">
                         <option value="0">Chọn giảng viên</option>
-                        <option value="1">Quốc Việt</option>
+                        @if ($teachers)
+                            @foreach ($teachers as $teacher)
+                                <option value="{{ $teacher->id }}" {{ old('teacher_id') == $teacher->id ? 'selected' : false }}>{{ $teacher->name }}</option>
+                            @endforeach
+                        @endif
                     </select>
                     <div class="invalid-feedback">
                         @error('teacher_id')

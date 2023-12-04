@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Termwind\Components\Raw;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Modules\Teacher\src\Http\Requests\TeacherRequest;
@@ -87,7 +88,16 @@ class TeacherController extends Controller
 
     public function delete($id)
     {
-        $this->teacherRepo->delete($id);
+        $teacherDelete = $this->teacherRepo->find($id);
+
+        $status = $this->teacherRepo->delete($id);
+
+        if ($status)
+        {
+            $image = $teacherDelete->image;
+            deleteFileStorage($image);
+        }
+
         return back()->with('msg', trans('teacher::messages.delete.success'));
     }
 }
