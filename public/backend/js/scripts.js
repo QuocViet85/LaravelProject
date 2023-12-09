@@ -7,7 +7,7 @@
 // Scripts
 // 
 
-window.addEventListener('DOMContentLoaded', event => { //khi load xong các DOM thì thực hiện lắng nghe và xử lý các sự kiện
+window.addEventListener('DOMContentLoaded', event => { 
 
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
@@ -88,25 +88,41 @@ window.addEventListener('DOMContentLoaded', event => { //khi load xong các DOM 
     let slug = document.querySelector('.slug');
     let isChangeSlug = false;
 
-    if (slug.value === '')
+    if (slug)
     {
-        title.addEventListener('keyup', (e) => { //key up là sự kiện nhả phím, key down là sự kiện nhấn phím
-            if (!isChangeSlug)
+        if (slug.value === '')
+        {
+            title.addEventListener('keyup', (e) => { //key up là sự kiện nhả phím, key down là sự kiện nhấn phím
+                if (!isChangeSlug)
+                {
+                    let titleValue = e.target.value;
+                    slug.value = getSlug(titleValue);
+                }
+            });
+        }
+        
+        slug.addEventListener('change', () => {
+            if (slug.value === '')
             {
-                let titleValue = e.target.value;
+                let title = document.querySelector('.title');
+                let titleValue = title.value;
                 slug.value = getSlug(titleValue);
             }
+            isChangeSlug = true;
         });
     }
     
-    slug.addEventListener('change', () => {
-        if (slug.value === '')
-        {
-            let title = document.querySelector('.title');
-            let titleValue = title.value;
-            slug.value = getSlug(titleValue);
-        }
-        isChangeSlug = true;
-    });
+
+    const logoutAction = document.querySelector('.logout-action');
+    const logoutForm = document.querySelector('.logout-form');
+    if (logoutAction && logoutForm)
+    {
+        logoutAction.addEventListener('click', e => {
+            e.preventDefault();
+            const action = e.target.href;
+            logoutForm.action = action;
+            logoutForm.submit();
+        });
+    }
 });
 
