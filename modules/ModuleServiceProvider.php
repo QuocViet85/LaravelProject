@@ -2,14 +2,15 @@
 namespace Modules;
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
 use Modules\User\src\Repositories\UserRepository;
+use Modules\Courses\src\Repositories\CoursesRepository;
+use Modules\Teacher\src\Repositories\TeacherRepository;
 use Modules\User\src\Repositories\UserRepositoryInterface;
 use Modules\Categories\src\Repositories\CategoriesRepository;
-use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
-use Modules\Courses\src\Repositories\CoursesRepository;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
-use Modules\Teacher\src\Repositories\TeacherRepository;
 use Modules\Teacher\src\Repositories\TeacherRepositoryInterface;
+use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -70,10 +71,20 @@ class ModuleServiceProvider extends ServiceProvider
         //Khai báo các thành phần của Modules
 
         //Khai báo Routes
-        if (File::exists($modulePath. '/routes/routes.php'))
-        {
-            $this->loadRoutesFrom($modulePath. '/routes/routes.php');
-        }
+        Route::group(['namespace' => 'Modules\\'.$module.'\src\Http\Controllers', 'middleware' => 'web'], function() use ($modulePath) {
+                if (File::exists($modulePath. '/routes/web.php'))
+                {
+                    $this->loadRoutesFrom($modulePath. '/routes/web.php');
+                }
+            });
+        
+        Route::group(['namespace' => 'Modules\\'.$module.'\src\Http\Controllers', 'middleware' => 'api', 'prefix' => 'api'], function() use ($modulePath) {
+            if (File::exists($modulePath. '/routes/api.php'))
+            {
+                $this->loadRoutesFrom($modulePath. '/routes/api.php');
+            }
+        });
+        
 
         //Khai báo Migration
         if (File::exists($modulePath. '/migrations'))

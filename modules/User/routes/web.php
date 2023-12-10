@@ -1,8 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
-        
-Route::group(['namespace' => 'Modules\User\src\Http\Controllers', 'middleware' => 'web'], function() {
-    Route::prefix('admin')->name('admin.')->group(function() {
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::prefix('users')->name('users.')->group(function() {
             Route::get('/', 'UserController@index')->name('index');
 
@@ -19,5 +18,3 @@ Route::group(['namespace' => 'Modules\User\src\Http\Controllers', 'middleware' =
             Route::delete('/delete/{user}', 'UserController@delete')->name('delete'); 
             });
         });
-    });
-
